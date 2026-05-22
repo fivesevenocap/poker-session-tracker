@@ -1,5 +1,5 @@
 from models import PokerSession
-from database import connect_db, create_tables, save_session
+from database import connect_db, create_tables, save_session, get_sessions
 
 
 def main() -> None:
@@ -18,7 +18,10 @@ def main() -> None:
     )
     save_session(session)
     
-    print(session.summary())
+sessions = get_sessions()
+
+for saved_session in sessions:
+    print(saved_session.summary())
 
 
 if __name__ == "__main__":

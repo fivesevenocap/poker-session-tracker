@@ -55,3 +55,30 @@ def save_session(session: PokerSession) -> None:
 
     connection.commit()
     connection.close()
+    
+def get_sessions() -> list[PokerSession]:
+    connection = connect_db()
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT date, duration, hands_played, buy_in, profit, room, limit_name, notes FROM sessions")
+
+    rows = cursor.fetchall()
+
+    sessions = []
+
+    for row in rows:
+        session = PokerSession(
+            date=row[0],
+            duration=row[1],
+            hands_played=row[2],
+            buy_in=row[3],
+            profit=row[4],
+            room=row[5],
+            limit=row[6],
+            notes=row[7],
+        )
+        sessions.append(session)
+
+    connection.close()
+
+    return sessions
