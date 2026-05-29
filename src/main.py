@@ -1,27 +1,28 @@
-from models import PokerSession
-from database import connect_db, create_tables, save_session, get_sessions
+import sys
+
+from database import create_tables, get_sessions
+
+
+def show_sessions() -> None:
+    sessions = get_sessions()
+
+    if not sessions:
+        print("No sessions found.")
+        return
+
+    for session in sessions:
+        print(session.summary())
 
 
 def main() -> None:
-    connect_db()
     create_tables()
 
-    session = PokerSession(
-        date="2026-05-18",
-        duration=2.5,
-        hands_played=450,
-        buy_in=2.0,
-        profit=7.35,
-        room="PokerOK",
-        limit="NL2",
-        notes="Good focus, no tilt",
-    )
-    save_session(session)
-    
-sessions = get_sessions()
+    command = sys.argv[1] if len(sys.argv) > 1 else "show"
 
-for saved_session in sessions:
-    print(saved_session.summary())
+    if command == "show":
+        show_sessions()
+    else:
+        print(f"Unknown command: {command}")
 
 
 if __name__ == "__main__":
