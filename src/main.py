@@ -35,7 +35,21 @@ def add_session() -> None:
     save_session(session)
     print("Session saved successfully.")
 
-
+def show_stats() -> None:
+    sessions = get_sessions()
+    total_sessions = len(sessions)
+    total_profit = 0.0
+    total_hands = 0
+    total_hours = 0.0
+    for session in sessions:
+        total_profit = total_profit + session.profit
+        total_hands = total_hands + session.hands_played
+        total_hours = total_hours + session.duration
+    print("Your stats:")
+    print(f"Total sessions: {total_sessions}")
+    print(f"Total profit: {total_profit}")
+    print(f"Total hands: {total_hands}")
+    print(f"Total hours: {total_hours}")
 
 def main() -> None:
     create_tables()
@@ -46,6 +60,8 @@ def main() -> None:
         show_sessions()
     elif command == "add":
         add_session()
+    elif command == "stats":
+        show_stats()
     else:
         print(f"Unknown command: {command}")
 
