@@ -32,6 +32,38 @@ def show_sessions() -> None:
             f"{session.profit:<7.2f}"
         )
 
+def edit_session() -> None:
+    sessions = get_sessions()
+
+    if not sessions:
+        print("No sessions found.")
+        return
+
+    show_sessions()
+
+    session_number = int(input("Session number: "))
+
+    if session_number < 1 or session_number > len(sessions):
+        print("Invalid session number.")
+        return
+
+    session = sessions[session_number - 1]
+
+    print(f"1. Date: {session.date}")
+    print(f"2. Room: {session.room}")
+    print(f"3. Limit: {session.limit}")
+    print(f"4. Duration: {session.duration}")
+    print(f"5. Hands played: {session.hands_played}")
+    print(f"6. Buy-in: {session.buy_in:.2f}")
+    print(f"7. Profit: {session.profit:.2f}")
+    print(f"8. Notes: {session.notes}")
+    field_number = int(input("Field number: "))
+    print(f"Selected field: {field_number}")
+    new_value = input("New value: ")
+    if field_number == 5:
+        session.hands_played = int(new_value)
+        print(f"Updated hands played: {session.hands_played}")
+
 def add_session() -> None:
     date = input("[1/8] Session date (YYYY-MM-DD): ")
     room = input("[2/8] Poker room: ")
@@ -91,6 +123,8 @@ def main() -> None:
         add_session()
     elif command == "stats":
         show_stats()
+    elif command == "edit":
+        edit_session()
     else:
         print(f"Unknown command: {command}")
 
