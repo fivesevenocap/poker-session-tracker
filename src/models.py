@@ -3,6 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class PokerSession:
+    id: int
     date: str
     duration: float
     hands_played: int

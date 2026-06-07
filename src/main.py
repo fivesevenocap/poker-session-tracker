@@ -74,6 +74,7 @@ def add_session() -> None:
     profit = float(input("[7/8] Profit: "))
     notes = input("[8/8] Notes:")
     session = PokerSession(
+    id=0,
     date=date,
     duration=duration,
     hands_played=hands,
