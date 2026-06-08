@@ -1,6 +1,6 @@
 import sys
 from models import PokerSession
-from database import create_tables, get_sessions, save_session
+from database import create_tables, get_sessions, save_session, update_session
 
 
 def show_sessions() -> None:
@@ -60,9 +60,24 @@ def edit_session() -> None:
     field_number = int(input("Field number: "))
     print(f"Selected field: {field_number}")
     new_value = input("New value: ")
-    if field_number == 5:
+    if field_number == 1:
+        session.date = str(new_value)
+    elif field_number == 2:
+        session.room = str(new_value)
+    elif field_number == 3:
+        session.limit = str(new_value)
+    elif field_number == 4:
+        session.duration = float(new_value)
+    elif field_number == 5:  
         session.hands_played = int(new_value)
-        print(f"Updated hands played: {session.hands_played}")
+    elif field_number == 6:
+        session.buy_in = float(new_value)
+    elif field_number == 7:
+        session.profit = float(new_value)
+    elif field_number == 8:
+        session.notes = str(new_value)   
+    update_session(session)
+    print("Session updated successfully.")
 
 def add_session() -> None:
     date = input("[1/8] Session date (YYYY-MM-DD): ")

@@ -83,3 +83,36 @@ def get_sessions() -> list[PokerSession]:
     connection.close()
 
     return sessions
+
+def update_session(session: PokerSession) -> None:
+    connection = connect_db()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        UPDATE sessions
+        SET date = ?,
+            duration = ?,
+            hands_played = ?,
+            buy_in = ?,
+            profit = ?,
+            room = ?,
+            limit_name = ?,
+            notes = ?
+        WHERE id = ?
+        """,
+        (
+            session.date,
+            session.duration,
+            session.hands_played,
+            session.buy_in,
+            session.profit,
+            session.room,
+            session.limit,
+            session.notes,
+            session.id,
+        ),
+    )
+
+    connection.commit()
+    connection.close()
