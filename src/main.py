@@ -59,6 +59,9 @@ def edit_session() -> None:
     print(f"8. Notes: {session.notes}")
     field_number = int(input("Field number: "))
     print(f"Selected field: {field_number}")
+    if field_number < 1 or field_number > 8:
+        print("Invalid field number.")
+        return
     new_value = input("New value: ")
     if field_number == 1:
         session.date = str(new_value)
