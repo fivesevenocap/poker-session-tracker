@@ -1,6 +1,6 @@
 import sys
 from models import PokerSession
-from database import create_tables, get_sessions, save_session, update_session
+from database import create_tables, get_sessions, save_session, update_session, delete_session
 
 
 def show_sessions() -> None:
@@ -131,6 +131,23 @@ def show_stats() -> None:
     print(f"Average profit per session: {average_profit:.2f}$")
     print(f"Profit per hour: {profit_per_hour:.2f}$/h")
 
+def delete_session_menu() -> None:
+    sessions = get_sessions()
+    if not sessions:
+        print("No sessions found.")
+        return
+
+    show_sessions()
+
+    session_number = int(input("Session number: "))
+
+    if session_number < 1 or session_number > len(sessions):
+        print("Invalid session number.")
+        return
+    session = sessions[session_number - 1]
+    delete_session(session.id)
+    print("Session deleted successfully.")
+
 def main() -> None:
     create_tables()
 
@@ -144,6 +161,8 @@ def main() -> None:
         show_stats()
     elif command == "edit":
         edit_session()
+    elif command == "delete":
+        delete_session_menu()
     else:
         print(f"Unknown command: {command}")
 

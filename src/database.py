@@ -116,3 +116,20 @@ def update_session(session: PokerSession) -> None:
 
     connection.commit()
     connection.close()
+
+def delete_session(session_id: int) -> None:
+    connection = connect_db()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        DELETE FROM sessions
+        WHERE id = ?
+        """,
+        (
+            session_id,
+        ),
+    )
+
+    connection.commit()
+    connection.close()
