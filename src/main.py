@@ -145,8 +145,14 @@ def delete_session_menu() -> None:
         print("Invalid session number.")
         return
     session = sessions[session_number - 1]
-    delete_session(session.id)
-    print("Session deleted successfully.")
+    confirmation = input("Are you sure? (y/n): ")
+    if confirmation == "y":
+        delete_session(session.id)
+        print("Session deleted successfully.")
+    elif confirmation == "n":
+        print("Deletion canceled.")
+    else:
+        print("Invalid confirmation.")
 
 def main() -> None:
     create_tables()
