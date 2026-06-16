@@ -146,6 +146,7 @@ def delete_session_menu() -> None:
         return
     session = sessions[session_number - 1]
     confirmation = input("Are you sure? (y/n): ")
+    confirmation = confirmation.lower()
     if confirmation == "y":
         delete_session(session.id)
         print("Session deleted successfully.")
