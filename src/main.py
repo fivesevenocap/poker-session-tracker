@@ -9,6 +9,7 @@ def show_sessions() -> None:
     if not sessions:
         print("No sessions found.")
         return
+    print("=== Poker Session Tracker ===")
     print(
     f"{'#':<3}"
     f"{'Date':<13}"
