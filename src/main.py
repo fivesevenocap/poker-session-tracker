@@ -10,6 +10,7 @@ def show_sessions() -> None:
         print("No sessions found.")
         return
     print("=== Poker Session Tracker ===")
+    print()
     print(
     f"{'#':<3}"
     f"{'Date':<13}"
@@ -124,6 +125,8 @@ def show_stats() -> None:
         profit_per_hour = total_profit / total_hours
     else:
         profit_per_hour = 0
+    print("=== Poker Session Tracker ===")
+    print()
     print("Your stats:")
     print(f"Total sessions: {total_sessions}")
     print(f"Total profit: {total_profit}")
