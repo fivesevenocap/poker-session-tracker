@@ -159,6 +159,20 @@ def delete_session_menu() -> None:
     else:
         print("Invalid confirmation.")
 
+def search_sessions() -> None:
+    sessions = get_sessions()
+    if not sessions:
+        print("No sessions found.")
+        return
+    found = False
+    room = input("Enter room: ")
+    for session in sessions:
+        if session.room == room:
+            found = True
+            print(session.summary())
+    if not found:
+        print("No sessions found for this room.")
+
 def main() -> None:
     create_tables()
 
@@ -174,6 +188,8 @@ def main() -> None:
         edit_session()
     elif command == "delete":
         delete_session_menu()
+    elif command == "search":
+        search_sessions()
     else:
         print(f"Unknown command: {command}")
 
