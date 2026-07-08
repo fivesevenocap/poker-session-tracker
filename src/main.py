@@ -166,8 +166,9 @@ def search_sessions() -> None:
         return
     found = False
     room = input("Enter room: ")
+    room = room.lower()
     for session in sessions:
-        if session.room == room:
+        if session.room.lower() == room:
             found = True
             print(session.summary())
     if not found:
