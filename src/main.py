@@ -164,16 +164,32 @@ def search_sessions() -> None:
     if not sessions:
         print("No sessions found.")
         return
-    found = False
-    room = input("Enter room: ")
-    room = room.lower()
-    for session in sessions:
-        if session.room.lower() == room:
-            found = True
-            print(session.summary())
-    if not found:
-        print("No sessions found for this room.")
-
+    print("Search by:")
+    print("1. Room")
+    print("2. Limit")
+    choice = input("Your choice: ")
+    if choice == "1":      
+        found = False
+        room = input("Enter room: ")
+        room = room.lower()
+        for session in sessions:
+            if session.room.lower() == room:
+                found = True
+                print(session.summary())
+        if not found:
+            print("No sessions found for this room.")
+    elif choice == "2":
+        found = False
+        limit = input("Enter limit: ")
+        limit = limit.lower()
+        for session in sessions:
+            if session.limit.lower() == limit:
+                found = True
+                print(session.summary())
+        if not found:
+            print("No sessions found for this limit.")
+    else:
+        print("Invalid choice.")
 def main() -> None:
     create_tables()
 
