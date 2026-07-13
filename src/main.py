@@ -167,6 +167,7 @@ def search_sessions() -> None:
     print("Search by:")
     print("1. Room")
     print("2. Limit")
+    print("3. Result")
     choice = input("Your choice: ")
     if choice == "1":      
         found = False
@@ -188,6 +189,33 @@ def search_sessions() -> None:
                 print(session.summary())
         if not found:
             print("No sessions found for this limit.")
+    elif choice == "3":
+        print("Result:")
+        print("1. Winning")
+        print("2. Losing")
+        ch = input("Select sessions by result: ")
+        if ch == "1":
+            found = False
+
+            for session in sessions:
+                if session.profit > 0:
+                    found = True
+                    print(session.summary())
+
+            if not found:
+                print("No winning sessions found.")
+        elif ch == "2":
+            found = False
+
+            for session in sessions:
+                if session.profit < 0:
+                    found = True
+                    print(session.summary())
+
+            if not found:
+                print("No losing sessions found.")
+        else:
+            print("Invalid choice.")
     else:
         print("Invalid choice.")
 def main() -> None:
